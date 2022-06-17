@@ -1,0 +1,6 @@
+reloadMessage: "Config wurde neu geladen."
+wrongcolor: "Die farbe die du angegeben hast funktioniert nicht."
+notdyeableitem: "Das Item in deiner Hand kann nicht eingefärbt werden."
+notenoughmoney: "Du hast nicht genug geld"
+itemsuccessfullycolored: "Das Item wurde erfolgreich eingefärbt."
+moneywithdrawn: "Es wurden %s von deinem Konto abgebucht."

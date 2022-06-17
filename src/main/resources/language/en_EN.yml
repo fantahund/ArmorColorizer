@@ -1,0 +1,7 @@
+reloadMessage: "Config was reloaded."
+test: "This is a test"
+wrongcolor: "The color you specified does not work."
+notdyeableitem: "The item in your hand cannot be colored."
+notenoughmoney: "You do not have enough money"
+itemsuccessfullycolored: "The item was successfully colored."
+moneywithdrawn: "There were %s debited from your account."

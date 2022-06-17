@@ -1,0 +1,10 @@
+name: ArmorColorizer
+version: '${project.version}'
+main: de.fanta.ArmorColorizer.ArmorColorizer
+api-version: 1.19
+prefix: ArmorColorizer
+authors: [ fanta ]
+depend: [CubesideUtils, Vault]
+description: With this plugin you can colorize armor in a GUI.
+commands:
+  armorcolorizer:
