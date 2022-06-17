@@ -1,5 +1,6 @@
 package de.fanta.ArmorColorizer.utils;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -24,6 +25,17 @@ public class ArmordDyeingUtil {
         return stack;
     }
 
+    public static boolean canColorized(ItemStack stack, String hexCode) {
+        Color color = hex2Color(hexCode);
+
+        if (color == null) {
+            return false;
+        }
+
+        LeatherArmorMeta itemMeta = (LeatherArmorMeta) stack.getItemMeta();
+        return itemMeta != null;
+    }
+
 
     public static Color hex2Color(String colorStr) {
         Color color;
@@ -33,5 +45,12 @@ public class ArmordDyeingUtil {
             color = null;
         }
         return color;
+    }
+
+    public static boolean itemHasSameColor(ItemStack stack, String hexColor) {
+        LeatherArmorMeta itemMeta = (LeatherArmorMeta) stack.getItemMeta();
+        Color itemColor = itemMeta.getColor();
+        Color stringColor = hex2Color(hexColor);
+        return itemColor.toString().equals(stringColor.toString());
     }
 }

@@ -11,12 +11,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class armorColorizerTestCommand extends SubCommand {
+public class armorColorizerDyeCommand extends SubCommand {
 
     private final ArmorColorizer plugin;
     private final int price = 100;
 
-    public armorColorizerTestCommand(ArmorColorizer plugin) {
+    public armorColorizerDyeCommand(ArmorColorizer plugin) {
         this.plugin = plugin;
     }
 
@@ -36,19 +36,26 @@ public class armorColorizerTestCommand extends SubCommand {
         ItemStack stack = player.getInventory().getItemInMainHand();
 
         if (ItemGroups.isDyeableItem(stack.getType())) {
-            ItemStack coloredStack = ArmordDyeingUtil.dyeingLeatherItem(stack, hexColor);
-            if (coloredStack == null) {
+            if (!ArmordDyeingUtil.canColorized(stack.clone(), hexColor)) {
                 ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("wrongcolor"));
                 return true;
             }
-            if (!plugin.getEconomy().withdrawPlayer(player, price).transactionSuccess()) {
-                ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("notenoughmoney"));
+
+            if (ArmordDyeingUtil.itemHasSameColor(stack, hexColor)) {
+                ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("itemHasSameColor"));
                 return true;
             }
-            player.getInventory().removeItem(stack);
-            player.getInventory().addItem(coloredStack);
-            ChatUtil.sendNormalMessage(player, plugin.getMessagesConfig().getString("itemsuccessfullycolored"));
-            ChatUtil.sendNormalMessage(player, String.format(plugin.getMessagesConfig().getString("moneywithdrawn"), price));
+
+            if (!plugin.getEconomy().withdrawPlayer(player, price).transactionSuccess()) {
+                ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("notenoughmoney"));
+            } else {
+                ItemStack coloredStack = ArmordDyeingUtil.dyeingLeatherItem(stack.clone(), hexColor);
+                player.getInventory().removeItem(player.getInventory().getItemInMainHand());
+                player.getInventory().setItemInMainHand(coloredStack);
+                ChatUtil.sendNormalMessage(player, plugin.getMessagesConfig().getString("itemsuccessfullycolored"));
+                ChatUtil.sendNormalMessage(player, String.format(plugin.getMessagesConfig().getString("moneywithdrawn"), price + " " + plugin.getEconomy().currencyNamePlural()));
+            }
+
         } else {
             ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("notdyeableitem"));
         }
