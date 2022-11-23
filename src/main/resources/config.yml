@@ -1,1 +1,5 @@
 language: de_DE
+economy:
+  enable: true
+  price: 100
+  creativemodeoverride: true

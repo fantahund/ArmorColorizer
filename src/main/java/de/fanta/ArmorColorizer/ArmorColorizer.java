@@ -2,7 +2,9 @@ package de.fanta.ArmorColorizer;
 
 import de.fanta.ArmorColorizer.commands.CommandRegistration;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
+import de.fanta.ArmorColorizer.utils.guiutils.WindowManager;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -43,6 +45,7 @@ public final class ArmorColorizer extends JavaPlugin {
         economy = economyRegistration.getProvider();
 
         new CommandRegistration(this).registerCommands();
+        Bukkit.getPluginManager().registerEvents(new WindowManager(), plugin);
     }
 
     @Override
