@@ -15,6 +15,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Collection;
+import java.util.Collections;
+
 public class ArmorColorizerHSBCommand extends SubCommand {
 
     private final ArmorColorizer plugin;
@@ -73,5 +76,8 @@ public class ArmorColorizerHSBCommand extends SubCommand {
         return "armorcolorizer.colorizer.hsb";
     }
 
-
+    @Override
+    public Collection<String> onTabComplete(CommandSender sender, Command command, String alias, ArgsParser args) {
+        return Collections.emptySet();
+    }
 }

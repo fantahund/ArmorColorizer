@@ -10,6 +10,8 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class ArmorColorizerColorListCommand extends SubCommand {
@@ -40,5 +42,10 @@ public class ArmorColorizerColorListCommand extends SubCommand {
     @Override
     public String getRequiredPermission() {
         return "armorcolorizer.colorizer.listcolors";
+    }
+
+    @Override
+    public Collection<String> onTabComplete(CommandSender sender, Command command, String alias, ArgsParser args) {
+        return Collections.emptySet();
     }
 }

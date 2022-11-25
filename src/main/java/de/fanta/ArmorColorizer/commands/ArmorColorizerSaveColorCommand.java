@@ -14,6 +14,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
 import java.sql.SQLException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.logging.Level;
 
 public class ArmorColorizerSaveColorCommand extends SubCommand {
@@ -64,5 +66,10 @@ public class ArmorColorizerSaveColorCommand extends SubCommand {
     @Override
     public String getRequiredPermission() {
         return "armorcolorizer.colorizer.savecolor";
+    }
+
+    @Override
+    public Collection<String> onTabComplete(CommandSender sender, Command command, String alias, ArgsParser args) {
+        return Collections.emptySet();
     }
 }
