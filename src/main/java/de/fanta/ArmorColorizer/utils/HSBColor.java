@@ -23,7 +23,7 @@ import java.awt.*;
  * In particular the HSB color space makes it easier change the Tone or Shade
  * of a color by adjusting the brightness value.
  */
-public class HSBColor {
+public class HSBColor implements Comparable<HSBColor> {
     private final Color rgb;
     private final float[] hsb;
     private final float alpha;
@@ -389,5 +389,17 @@ public class HSBColor {
         }
 
         return new Color(r, g, b, alpha);
+    }
+
+    @Override
+    public int compareTo(HSBColor other) {
+        int cmp = Float.compare(this.getHue(), other.getHue()); // asc
+        if (cmp == 0) {
+            cmp = -Float.compare(this.getSaturation(), other.getSaturation()); // desc
+            if (cmp == 0) {
+                cmp = -Float.compare(this.getBrightness(), other.getBrightness()); // desc
+            }
+        }
+        return cmp;
     }
 }

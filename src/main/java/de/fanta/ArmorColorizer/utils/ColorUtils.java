@@ -11,23 +11,11 @@ import java.util.Random;
 
 public class ColorUtils {
     public static List<Color> rainbow(List<Color> colorList) {
-        HashMap<Integer, Color> hsbColors = new HashMap<>();
-        for (Color color : colorList) {
-            HSBColor hsbColor = new HSBColor(new java.awt.Color(color.asRGB()));
-            hsbColors.put(Integer.parseInt((int) hsbColor.getHue() + "" + (int) hsbColor.getSaturation() + "" + (int) hsbColor.getBrightness()), color);
-        }
-
-
-        Integer[] colors = hsbColors.keySet().toArray(Integer[]::new);
-        Arrays.sort(colors, Comparator.comparingInt(Integer::intValue));
-
-        List<Color> rainbowList = new ArrayList<>();
-        for (Integer colorInt : colors) {
-            rainbowList.add(hsbColors.get(colorInt));
-        }
-
-
-        return rainbowList;
+        return colorList.stream()
+                .map(c -> new HSBColor(new java.awt.Color(c.asRGB())))
+                .sorted()
+                .map(c -> Color.fromRGB(c.getRGB().getRed(), c.getRGB().getGreen(), c.getRGB().getBlue()))
+                .toList();
     }
 
     public static Color randomRGBColor() {

@@ -100,6 +100,12 @@ public final class ArmorColorizer extends JavaPlugin {
         playerColors.put(player.getUniqueId(), colorList);
     }
 
+    public void removePlayerColor(Player player, Color color) {
+        List<Color> colorList = playerColors.getOrDefault(player.getUniqueId(), new ArrayList<>());
+        colorList.remove(color);
+        playerColors.put(player.getUniqueId(), colorList);
+    }
+
     public List<Color> getPlayerColors(Player player) {
         return playerColors.get(player.getUniqueId());
     }

@@ -38,7 +38,7 @@ public class SavedColorsGui extends AbstractWindow {
     private final ArmorColorizer plugin;
 
     public SavedColorsGui(List<Color> colorList, Player player, ArmorColorizer plugin, boolean rainbow) {
-        super(player, Bukkit.createInventory(player, WINDOW_SIZE, plugin.getMessages().getGuiTitle()));
+        super(player, Bukkit.createInventory(player, WINDOW_SIZE, plugin.getMessages().getGuiTitleSave()));
         this.plugin = plugin;
         isRainbowListByPlayer.put(player.getUniqueId(), rainbow);
         if (rainbow) {
@@ -143,6 +143,8 @@ public class SavedColorsGui extends AbstractWindow {
             if (event.isLeftClick()) {
                 ArmordDyeingUtil.applyColorToItem(p, p.getInventory().getItemInMainHand(), color);
                 getPlayer().closeInventory();
+            } else if (event.isRightClick()) {
+                new ColorDeleteGui(p, color).open();
             }
         }
     }

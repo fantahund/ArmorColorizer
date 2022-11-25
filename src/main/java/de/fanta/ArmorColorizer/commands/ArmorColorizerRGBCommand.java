@@ -49,15 +49,15 @@ public class ArmorColorizerRGBCommand extends SubCommand {
             int g = args.getNext(-1);
             int b = args.getNext(-1);
             if (!(r <= 255 && r >= 0)) {
-                ChatUtil.sendErrorMessage(player, "Der Rot Wert muss zwischen 0-255 liegen!");
+                ChatUtil.sendErrorMessage(player, plugin.getMessages().getRedRangeError());
                 return true;
             }
             if (!(g <= 255 && g >= 0)) {
-                ChatUtil.sendErrorMessage(player, "Der Grün Wert muss zwischen 0-255 liegen!");
+                ChatUtil.sendErrorMessage(player, plugin.getMessages().getGreenRangeError());
                 return true;
             }
             if (!(b <= 255 && b >= 0)) {
-                ChatUtil.sendErrorMessage(player, "Der Blau Wert muss zwischen 0-255 liegen!");
+                ChatUtil.sendErrorMessage(player, plugin.getMessages().getBlueRangeError());
                 return true;
             }
             Color color = Color.fromRGB(r, g, b);

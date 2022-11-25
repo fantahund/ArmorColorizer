@@ -50,15 +50,15 @@ public class ArmorColorizerHSBCommand extends SubCommand {
             int saturation = args.getNext(-1);
             int brightness = args.getNext(-1);
             if (!(hue <= 360 && hue >= 0)) {
-                ChatUtil.sendErrorMessage(player, "Der HUE Wert muss zwischen 0-360 liegen!");
+                ChatUtil.sendErrorMessage(player, plugin.getMessages().getHueRangeError());
                 return true;
             }
             if (!(saturation <= 100 && saturation >= 0)) {
-                ChatUtil.sendErrorMessage(player, "Der Saturation Wert muss zwischen 0-100 liegen!");
+                ChatUtil.sendErrorMessage(player, plugin.getMessages().getSaturationRangeError());
                 return true;
             }
             if (!(brightness <= 100 && brightness >= 0)) {
-                ChatUtil.sendErrorMessage(player, "Der Brightness Wert muss zwischen 0-100 liegen!");
+                ChatUtil.sendErrorMessage(player, plugin.getMessages().getBrightnessRangeError());
                 return true;
             }
 

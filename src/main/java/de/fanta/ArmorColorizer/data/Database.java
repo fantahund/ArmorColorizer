@@ -21,6 +21,7 @@ public class Database {
     private final SQLConfig config;
     private final ArmorColorizer plugin;
     private final String insertColorQuery;
+    private final String deleteColorQuery;
     private final String getColorsQuery;
 
     public Database(SQLConfig config, ArmorColorizer plugin) {
@@ -36,6 +37,7 @@ public class Database {
         }
 
         insertColorQuery = "INSERT INTO " + config.getTablePrefix() + "_colors" + " (uuid, color, timestamp) VALUE (?, ?, ?)";
+        deleteColorQuery = "DELETE FROM " + config.getTablePrefix() + "_colors" + " WHERE `uuid` = ? AND `color` = ?";
         getColorsQuery = "SELECT * FROM " + config.getTablePrefix() + "_colors" + " WHERE uuid = ?" + " ORDER BY timestamp DESC";
     }
 
@@ -62,6 +64,16 @@ public class Database {
             smt.setInt(2, color);
             smt.setLong(3, System.currentTimeMillis());
 
+            smt.executeUpdate();
+            return null;
+        });
+    }
+
+    public void deleteColor(UUID uuid, int color) throws SQLException {
+        this.connection.runCommands((connection, sqlConnection) -> {
+            PreparedStatement smt = sqlConnection.getOrCreateStatement(deleteColorQuery);
+            smt.setString(1, uuid.toString());
+            smt.setInt(2, color);
             smt.executeUpdate();
             return null;
         });

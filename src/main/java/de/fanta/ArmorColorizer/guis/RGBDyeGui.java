@@ -1,14 +1,14 @@
 package de.fanta.ArmorColorizer.guis;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
+import de.fanta.ArmorColorizer.data.Messages;
 import de.fanta.ArmorColorizer.utils.ArmordDyeingUtil;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
 import de.fanta.ArmorColorizer.utils.ColorUtils;
-import de.fanta.ArmorColorizer.utils.HSBColor;
+import de.fanta.ArmorColorizer.utils.CustomHeadsUtil;
 import de.fanta.ArmorColorizer.utils.guiutils.AbstractWindow;
 import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
 import de.iani.cubesideutils.bukkit.items.CustomHeads;
-import de.iani.cubesideutils.bukkit.items.ItemGroups;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
@@ -18,8 +18,10 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.logging.Level;
 
 public class RGBDyeGui extends AbstractWindow {
     private static final ArmorColorizer plugin = ArmorColorizer.getPlugin();
@@ -42,12 +44,13 @@ public class RGBDyeGui extends AbstractWindow {
 
     private static final int CONFIRM_INDEX = 16;
     private static final int RANDOM_INDEX = 5;
+    private static final int SAVE_COLOR_INDEX = 23;
 
     private static final HashMap<UUID, ItemStack> playerItemList = new HashMap<>();
     private static final HashMap<UUID, Color> playerColorList = new HashMap<>();
 
     public RGBDyeGui(Player player, ItemStack stack) {
-        super(player, Bukkit.createInventory(player, INVENTORY_SIZE, "ArmorColorizer >> Dye Armor"));
+        super(player, Bukkit.createInventory(player, INVENTORY_SIZE, plugin.getMessages().getRgbColorizerTitle()));
         playerItemList.put(player.getUniqueId(), stack);
     }
 
@@ -105,6 +108,22 @@ public class RGBDyeGui extends AbstractWindow {
                 ArmordDyeingUtil.applyColorToItem(player, stack, color);
                 player.closeInventory();
             }
+            case SAVE_COLOR_INDEX -> {
+                Color color = playerColorList.get(player.getUniqueId());
+                try {
+                    if (!plugin.getPlayerColors(player).contains(color)) {
+                        plugin.getDatabase().insertColor(player.getUniqueId(), color.asRGB());
+                        plugin.addPlayerColor(player, color);
+                        ChatUtil.sendNormalMessage(player, plugin.getMessages().getInsertColorSuccessful());
+                        rebuildInventory();
+                    } else {
+                        ChatUtil.sendWarningMessage(player, plugin.getMessages().getInsertColorAlreadyAvailable());
+                    }
+                } catch (SQLException e) {
+                    plugin.getLogger().log(Level.SEVERE, "color " + color.asRGB() + "could not be saved", e);
+                    ChatUtil.sendErrorMessage(player, plugin.getMessages().getInsertColorError());
+                }
+            }
             default -> {
             }
         }
@@ -118,37 +137,37 @@ public class RGBDyeGui extends AbstractWindow {
         meta.setColor(color);
         armorItem.setItemMeta(meta);
         playerColorList.put(getPlayer().getUniqueId(), color);
+        Messages messages = plugin.getMessages();
 
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             ItemStack item;
             switch (i) {
-                case RED_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.RED_DYE, ChatUtil.RED + "Red: " + color.getRed());
+                case RED_INDEX -> item = GUIUtils.createGuiItem(Material.RED_DYE, messages.getRed(color.getRed()));
                 case ADD_RED_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(ChatUtil.RED + "Add Red (" + color.getRed() + ")", ChatUtil.YELLOW + "Click: +1", ChatUtil.YELLOW + "Shift + Click: +10");
+                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(messages.getAddRed(color.getRed()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_RED_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(ChatUtil.RED + "Remove Red (" + color.getRed() + ")", ChatUtil.YELLOW + "Click: -1", ChatUtil.YELLOW + "Shift + Click: -10");
+                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveRed(color.getRed()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case GREEN_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.GREEN_DYE, ChatUtil.GREEN + "Green: " + color.getGreen());
+                        item = GUIUtils.createGuiItem(Material.GREEN_DYE, messages.getGreen(color.getGreen()));
                 case ADD_GREEN_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(ChatUtil.GREEN + "Add Green (" + color.getGreen() + ")", ChatUtil.YELLOW + "Click: +1", ChatUtil.YELLOW + "Shift + Click: +10");
+                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(messages.getAddGreen(color.getGreen()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_GREEN_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(ChatUtil.GREEN + "Remove Green (" + color.getGreen() + ")", ChatUtil.YELLOW + "Click: -1", ChatUtil.YELLOW + "Shift + Click: -10");
+                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveGreen(color.getGreen()), messages.getClick(-1), messages.getShiftClick(-10));
 
-                case BLUE_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.BLUE_DYE, ChatUtil.BLUE + "Blue: " + color.getBlue());
+                case BLUE_INDEX -> item = GUIUtils.createGuiItem(Material.BLUE_DYE, messages.getBlue(color.getBlue()));
                 case ADD_BLUE_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(ChatUtil.BLUE + "Add Blue (" + color.getBlue() + ")", ChatUtil.YELLOW + "Click: +1", ChatUtil.YELLOW + "Shift + Click: +10");
+                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(messages.getAddBlue(color.getBlue()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_BLUE_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(ChatUtil.BLUE + "Remove Blue (" + color.getBlue() + ")", ChatUtil.YELLOW + "Click: -1", ChatUtil.YELLOW + "Shift + Click: -10");
+                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveBlue(color.getBlue()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case ARMOR_INDEX -> item = armorItem;
 
                 case CONFIRM_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + "Change Color", plugin.getEconomy().getBalance(getPlayer()) >= 100 ? ChatUtil.GREEN + "Price: 100 Cubes" : ChatUtil.RED + "You do not have enough money (100 Cubes)");
-
-                case RANDOM_INDEX -> item = CustomHeads.RAINBOW_R.getHead(ChatUtil.GREEN + "Random Color");
+                        item = CustomHeads.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), plugin.getEconomy().getBalance(getPlayer()) >= plugin.getArmorColorizerConfig().getEconomyPrice() ? ChatUtil.GREEN + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), getPlayer().getGameMode() == GameMode.CREATIVE ? "" : plugin.getArmorColorizerConfig().getEconomyPrice() > 1 ? plugin.getEconomy().currencyNamePlural() : plugin.getEconomy().currencyNameSingular()) : ChatUtil.RED + messages.getNotenoughmoney());
+                case RANDOM_INDEX -> item = CustomHeads.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
+                case SAVE_COLOR_INDEX ->
+                        item = CustomHeadsUtil.SERVER.getHead(plugin.getPlayerColors(getPlayer()).contains(color) ? ChatUtil.RED + messages.getGuiSaveColor() : ChatUtil.GREEN + messages.getGuiSaveColor());
                 default -> item = GUIUtils.EMPTY_ICON;
             }
             this.getInventory().setItem(i, item);
