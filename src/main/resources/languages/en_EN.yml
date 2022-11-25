@@ -1,9 +1,9 @@
-reloadMessage: "Config was reloaded."
-test: "This is a test"
+#Use normal Chat Colors (--> &6 <-- Gold) or Hex Colors (--> &xffffff <-- White)
+prefix: '&x87f7ea[&x52ff9dArmorColorizer&x87f7ea]'
 wrongcolor: "The color you specified does not work."
 notdyeableitem: "The item in your hand cannot be colored."
 notenoughmoney: "You do not have enough money"
 itemsuccessfullycolored: "The item was successfully colored."
-moneywithdrawn: "There were %s debited from your account."
+moneywithdrawn: "There were %price% %currency% debited from your account."
 itemHasSameColor: "The item already has this color."
 noiteminhand: "You must have a dyeable item in your hand."

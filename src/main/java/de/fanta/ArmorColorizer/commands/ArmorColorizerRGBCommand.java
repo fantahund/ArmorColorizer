@@ -31,12 +31,12 @@ public class ArmorColorizerRGBCommand extends SubCommand {
         ItemStack stack = player.getInventory().getItemInMainHand();
 
         if (stack.getType() == Material.AIR) {
-            ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("noiteminhand"));
+            ChatUtil.sendErrorMessage(player, plugin.getMessages().getNoiteminhand());
             return true;
         }
 
         if (!ItemGroups.isDyeableItem(stack.getType())) {
-            ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("notdyeableitem"));
+            ChatUtil.sendErrorMessage(player, plugin.getMessages().getNotdyeableitem());
             return true;
         }
 

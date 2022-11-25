@@ -1,5 +1,5 @@
-language: de_DE
+#Plugin Language (en_EN, de_DE)
+language: en_EN
 economy:
   enable: true
-  price: 100
-  creativemodeoverride: true
+  price: 100.0

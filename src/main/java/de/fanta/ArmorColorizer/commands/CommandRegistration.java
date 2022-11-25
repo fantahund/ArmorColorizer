@@ -11,6 +11,5 @@ public record CommandRegistration(ArmorColorizer plugin) {
         testRouter.addCommandMapping(new ArmorColorizerHexCommand(), "hex");
         testRouter.addCommandMapping(new ArmorColorizerRGBCommand(plugin), "rgb");
         testRouter.addCommandMapping(new ArmorColorizerHSBCommand(plugin), "hsb");
-        testRouter.addCommandMapping(new ArmorColorizerReloadCommand(plugin), "reload");
     }
 }

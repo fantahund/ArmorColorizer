@@ -1,8 +1,9 @@
-reloadMessage: "Config wurde neu geladen."
+#Nutze Normale Chat Farben (--> &6 <-- Gold) oder Hex Farben (--> &xffffff <-- Weiß)
+prefix: '&x87f7ea[&x52ff9dArmorColorizer&x87f7ea]'
 wrongcolor: "Die farbe die du angegeben hast funktioniert nicht."
 notdyeableitem: "Das Item in deiner Hand kann nicht eingefärbt werden."
 notenoughmoney: "Du hast nicht genug geld"
 itemsuccessfullycolored: "Das Item wurde erfolgreich eingefärbt."
-moneywithdrawn: "Es wurden %s von deinem Konto abgebucht."
+moneywithdrawn: "Es wurden %price% %currency% von deinem Konto abgebucht."
 itemHasSameColor: "Das Item hat bereits diese Farbe."
 noiteminhand: "Du musst ein färbbares Item in der Hand haben."
