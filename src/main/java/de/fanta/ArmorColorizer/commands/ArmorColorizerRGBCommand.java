@@ -1,7 +1,7 @@
-package de.fanta.ArmorColorizer.commands.armorcolorizer;
+package de.fanta.ArmorColorizer.commands;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
-import de.fanta.ArmorColorizer.guis.DyeLeatherArmorGui;
+import de.fanta.ArmorColorizer.guis.RGBDyeGui;
 import de.fanta.ArmorColorizer.utils.ArmordDyeingUtil;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
 import de.iani.cubesideutils.bukkit.commands.SubCommand;
@@ -14,12 +14,11 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-public class armorColorizerDyeCommand extends SubCommand {
+public class ArmorColorizerRGBCommand extends SubCommand {
 
     private final ArmorColorizer plugin;
-    private final int price = 100;
 
-    public armorColorizerDyeCommand(ArmorColorizer plugin) {
+    public ArmorColorizerRGBCommand(ArmorColorizer plugin) {
         this.plugin = plugin;
     }
 
@@ -42,31 +41,35 @@ public class armorColorizerDyeCommand extends SubCommand {
         }
 
         if (!args.hasNext()) {
-            new DyeLeatherArmorGui(player, stack.clone()).open();
-            return true;
-        }
-        String hexColor = args.getNext();
-
-        Color color = ArmordDyeingUtil.hex2Color(hexColor);
-        if (color == null) {
-            ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("wrongcolor"));
-            return true;
+            new RGBDyeGui(player, stack.clone()).open();
         }
 
-        if (ArmordDyeingUtil.itemHasSameColor(stack, hexColor)) {
-            ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("itemHasSameColor"));
-            return true;
+        if (args.remaining() == 3) {
+            int r = args.getNext(-1);
+            int g = args.getNext(-1);
+            int b = args.getNext(-1);
+            if (!(r <= 255 && r >= 0)) {
+                ChatUtil.sendErrorMessage(player, "Der Rot Wert muss zwischen 0-255 liegen!");
+                return true;
+            }
+            if (!(g <= 255 && g >= 0)) {
+                ChatUtil.sendErrorMessage(player, "Der Grün Wert muss zwischen 0-255 liegen!");
+                return true;
+            }
+            if (!(b <= 255 && b >= 0)) {
+                ChatUtil.sendErrorMessage(player, "Der Blau Wert muss zwischen 0-255 liegen!");
+                return true;
+            }
+            Color color = Color.fromRGB(r, g, b);
+            ArmordDyeingUtil.applyColorToItem(player, stack, color);
         }
 
-        if (plugin.getEconomy().withdrawPlayer(player, price).transactionSuccess()) {
-            ArmordDyeingUtil.dyeingLeatherItem(stack, hexColor);
-            ChatUtil.sendNormalMessage(player, plugin.getMessagesConfig().getString("itemsuccessfullycolored"));
-            ChatUtil.sendNormalMessage(player, String.format(plugin.getMessagesConfig().getString("moneywithdrawn"), price + " " + plugin.getEconomy().currencyNamePlural()));
-        } else {
-            ChatUtil.sendErrorMessage(player, plugin.getMessagesConfig().getString("notenoughmoney"));
-        }
         return true;
     }
 
+    @Override
+    public String getRequiredPermission() {
+        return "armorcolorizer.colorizer.rgb";
+    }
 
 }

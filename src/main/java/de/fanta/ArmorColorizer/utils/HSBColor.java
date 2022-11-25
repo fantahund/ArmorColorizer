@@ -1,8 +1,11 @@
 package de.fanta.ArmorColorizer.utils;
 
-import java.awt.Color;
+import java.awt.*;
 
 /**
+ * Original Code from jeffjianzhao: https://github.com/jeffjianzhao/DAViewer/blob/master/src/daviewer/HSLColor.java
+ * <p>
+ * /**
  * The HSBColor class provides methods to manipulate HSB (Hue, Saturation
  * Brightness) values to create a corresponding Color object using the RGB
  * ColorSpace.
@@ -26,10 +29,9 @@ public class HSBColor {
     private final float alpha;
 
     /**
-     * Create a HSLColor object using an RGB Color object.
+     * Create a HSBColor object using an RGB Color object.
      *
-     * @param rgb
-     *            the RGB Color object
+     * @param rgb the RGB Color object
      */
     public HSBColor(Color rgb) {
         this.rgb = rgb;
@@ -38,57 +40,47 @@ public class HSBColor {
     }
 
     /**
-     * Create a HSLColor object using individual HSL values and a default
+     * Create a HSBColor object using individual HSB values and a default
      * alpha value of 1.0.
      *
-     * @param h
-     *            is the Hue value in degrees between 0 - 360
-     * @param s
-     *            is the Saturation percentage between 0 - 100
-     * @param l
-     *            is the Lumanance percentage between 0 - 100
+     * @param h is the Hue value in degrees between 0 - 360
+     * @param s is the Saturation percentage between 0 - 100
+     * @param l is the Lumanance percentage between 0 - 100
      */
     public HSBColor(float h, float s, float l) {
         this(h, s, l, 1.0f);
     }
 
     /**
-     * Create a HSLColor object using individual HSL values.
+     * Create a HSBColor object using individual HSB values.
      *
-     * @param h
-     *            the Hue value in degrees between 0 - 360
-     * @param s
-     *            the Saturation percentage between 0 - 100
-     * @param l
-     *            the Lumanance percentage between 0 - 100
-     * @param alpha
-     *            the alpha value between 0 - 1
+     * @param h     the Hue value in degrees between 0 - 360
+     * @param s     the Saturation percentage between 0 - 100
+     * @param b     the Lumanance percentage between 0 - 100
+     * @param alpha the alpha value between 0 - 1
      */
     public HSBColor(float h, float s, float b, float alpha) {
-        hsb = new float[] { h, s, b };
+        hsb = new float[]{h, s, b};
         this.alpha = alpha;
         rgb = toRGB(hsb, alpha);
     }
 
     /**
-     * Create a HSLColor object using an array containing the
-     * individual HSL values and with a default alpha value of 1.
+     * Create a HSbColor object using an array containing the
+     * individual HSb values and with a default alpha value of 1.
      *
-     * @param hsl
-     *            array containing HSL values
+     * @param hsb array containing HSB values
      */
     public HSBColor(float[] hsb) {
         this(hsb, 1.0f);
     }
 
     /**
-     * Create a HSLColor object using an array containing the
-     * individual HSL values.
+     * Create a HSBColor object using an array containing the
+     * individual HSB values.
      *
-     * @param hsl
-     *            array containing HSL values
-     * @param alpha
-     *            the alpha value between 0 - 1
+     * @param hsb   array containing HSB values
+     * @param alpha the alpha value between 0 - 1
      */
     public HSBColor(float[] hsb, float alpha) {
         this.hsb = hsb;
@@ -97,11 +89,10 @@ public class HSBColor {
     }
 
     /**
-     * Create a RGB Color object based on this HSLColor with a different
+     * Create an RGB Color object based on this HSBColor with a different
      * Hue value. The degrees specified is an absolute value.
      *
-     * @param degrees
-     *            - the Hue value between 0 - 360
+     * @param degrees - the Hue value between 0 - 360
      * @return the RGB Color object
      */
     public Color adjustHue(float degrees) {
@@ -109,11 +100,10 @@ public class HSBColor {
     }
 
     /**
-     * Create a RGB Color object based on this HSLColor with a different
+     * Create an RGB Color object based on this HSBColor with a different
      * Luminance value. The percent specified is an absolute value.
      *
-     * @param percent
-     *            - the Luminance value between 0 - 100
+     * @param percent - the Luminance value between 0 - 100
      * @return the RGB Color object
      */
     public Color adjustBrightness(float percent) {
@@ -121,11 +111,10 @@ public class HSBColor {
     }
 
     /**
-     * Create a RGB Color object based on this HSLColor with a different
+     * Create an RGB Color object based on this HSBColor with a different
      * Saturation value. The percent specified is an absolute value.
      *
-     * @param percent
-     *            - the Saturation value between 0 - 100
+     * @param percent - the Saturation value between 0 - 100
      * @return the RGB Color object
      */
     public Color adjustSaturation(float percent) {
@@ -133,12 +122,11 @@ public class HSBColor {
     }
 
     /**
-     * Create a RGB Color object based on this HSLColor with a different
+     * Create a RGB Color object based on this HSBColor with a different
      * Shade. Changing the shade will return a darker color. The percent
      * specified is a relative value.
      *
-     * @param percent
-     *            - the value between 0 - 100
+     * @param percent - the value between 0 - 100
      * @return the RGB Color object
      */
     public Color adjustShade(float percent) {
@@ -149,12 +137,11 @@ public class HSBColor {
     }
 
     /**
-     * Create an RGB Color object based on this HSLColor with a different
+     * Create an RGB Color object based on this HSBColor with a different
      * Tone. Changing the tone will return a lighter color. The percent
      * specified is a relative value.
      *
-     * @param percent
-     *            - the value between 0 - 100
+     * @param percent - the value between 0 - 100
      * @return the RGB Color object
      */
     public Color adjustTone(float percent) {
@@ -175,7 +162,7 @@ public class HSBColor {
 
     /**
      * Create an RGB Color object that is the complementary color of this
-     * HSLColor. This is a convenience method. The complementary color is
+     * HSBColor. This is a convenience method. The complementary color is
      * determined by adding 180 degrees to the Hue value.
      *
      * @return the RGB Color object
@@ -241,9 +228,9 @@ public class HSBColor {
     }
 
     /**
-     * Convert a RGB Color to it corresponding HSL values.
+     * Convert a RGB Color to it corresponding HSB values.
      *
-     * @return an array containing the 3 HSL values.
+     * @return an array containing the 3 HSB values.
      */
     public static float[] fromRGB(Color color) {
         // Get RGB values in the range 0 - 1
@@ -253,7 +240,7 @@ public class HSBColor {
         float g = rgb[1];
         float b = rgb[2];
 
-        // Minimum and Maximum RGB values are used in the HSL calculations
+        // Minimum and Maximum RGB values are used in the HSB calculations
 
         float min = Math.min(r, Math.min(g, b));
         float max = Math.max(r, Math.max(g, b));
@@ -284,7 +271,7 @@ public class HSBColor {
             s = (max - min) / max;
         }
 
-        return new float[] { h, s * 100, l * 100 };
+        return new float[]{h, s * 100, l * 100};
     }
 
     /**
@@ -293,8 +280,7 @@ public class HSBColor {
      * S (Saturation) is specified as a percentage in the range 1 - 100.
      * B (Brightness) is specified as a percentage in the range 1 - 100.
      *
-     * @param hsb
-     *            an array containing the 3 HSB values
+     * @param hsb an array containing the 3 HSB values
      * @returns the RGB Color object
      */
     public static Color toRGB(float[] hsb) {
@@ -302,30 +288,25 @@ public class HSBColor {
     }
 
     /**
-     * Convert HSL values to a RGB Color.
+     * Convert HSB values to an RGB Color.
      * H (Hue) is specified as degrees in the range 0 - 360.
      * S (Saturation) is specified as a percentage in the range 1 - 100.
      * L (Lumanance) is specified as a percentage in the range 1 - 100.
      *
-     * @param hsl
-     *            an array containing the 3 HSL values
-     * @param alpha
-     *            the alpha value between 0 - 1
+     * @param hsb   an array containing the 3 HSB values
+     * @param alpha the alpha value between 0 - 1
      * @returns the RGB Color object
      */
-    public static Color toRGB(float[] hsl, float alpha) {
-        return toRGB(hsl[0], hsl[1], hsl[2], alpha);
+    public static Color toRGB(float[] hsb, float alpha) {
+        return toRGB(hsb[0], hsb[1], hsb[2], alpha);
     }
 
     /**
-     * Convert HSL values to an RGB Color with a default alpha value of 1.
+     * Convert HSB values to an RGB Color with a default alpha value of 1.
      *
-     * @param h
-     *            Hue is specified as degrees in the range 0 - 360.
-     * @param s
-     *            Saturation is specified as a percentage in the range 1 - 100.
-     * @param l
-     *            Lumanance is specified as a percentage in the range 1 - 100.
+     * @param h Hue is specified as degrees in the range 0 - 360.
+     * @param s Saturation is specified as a percentage in the range 1 - 100.
+     * @param l Lumanance is specified as a percentage in the range 1 - 100.
      * @returns the RGB Color object
      */
     public static Color toRGB(float h, float s, float l) {
@@ -333,16 +314,12 @@ public class HSBColor {
     }
 
     /**
-     * Convert HSL values to a RGB Color.
+     * Convert HSB values to an RGB Color.
      *
-     * @param h
-     *            Hue is specified as degrees in the range 0 - 360.
-     * @param s
-     *            Saturation is specified as a percentage in the range 1 - 100.
-     * @param l
-     *            Lumanance is specified as a percentage in the range 1 - 100.
-     * @param alpha
-     *            the alpha value between 0 - 1
+     * @param hue   Hue is specified as degrees in the range 0 - 360.
+     * @param s     Saturation is specified as a percentage in the range 1 - 100.
+     * @param l     Lumanance is specified as a percentage in the range 1 - 100.
+     * @param alpha the alpha value between 0 - 1
      * @returns the RGB Color object
      */
     public static Color toRGB(float hue, float s, float l, float alpha) {
@@ -378,36 +355,36 @@ public class HSBColor {
             float q = l * (1.0f - s * f);
             float t = l * (1.0f - (s * (1.0f - f)));
             switch ((int) h) {
-                case 0:
+                case 0 -> {
                     r = l;
                     g = t;
                     b = p;
-                    break;
-                case 1:
+                }
+                case 1 -> {
                     r = q;
                     g = l;
                     b = p;
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     r = p;
                     g = l;
                     b = t;
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     r = p;
                     g = q;
                     b = l;
-                    break;
-                case 4:
+                }
+                case 4 -> {
                     r = t;
                     g = p;
                     b = l;
-                    break;
-                case 5:
+                }
+                case 5 -> {
                     r = l;
                     g = p;
                     b = q;
-                    break;
+                }
             }
         }
 

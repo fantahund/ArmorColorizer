@@ -8,3 +8,4 @@ depend: [CubesideUtils, Vault]
 description: With this plugin you can colorize armor in a GUI.
 commands:
   armorcolorizer:
+    aliases: [colorizer, ac]

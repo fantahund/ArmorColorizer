@@ -1,4 +1,4 @@
-package de.fanta.ArmorColorizer.commands.armorcolorizer;
+package de.fanta.ArmorColorizer.commands;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
@@ -7,11 +7,11 @@ import de.iani.cubesideutils.commands.ArgsParser;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 
-public class armorColorizerReloadCommand extends SubCommand {
+public class ArmorColorizerReloadCommand extends SubCommand {
 
     private final ArmorColorizer plugin;
 
-    public armorColorizerReloadCommand(ArmorColorizer plugin) {
+    public ArmorColorizerReloadCommand(ArmorColorizer plugin) {
         this.plugin = plugin;
 
     }
