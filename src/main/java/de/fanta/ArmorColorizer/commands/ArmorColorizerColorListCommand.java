@@ -5,7 +5,6 @@ import de.fanta.ArmorColorizer.guis.SavedColorsGui;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
 import de.iani.cubesideutils.bukkit.commands.SubCommand;
 import de.iani.cubesideutils.commands.ArgsParser;
-import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Color;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -40,6 +39,6 @@ public class ArmorColorizerColorListCommand extends SubCommand {
 
     @Override
     public String getRequiredPermission() {
-        return "armorcolorizer.colorizer.savecolor";
+        return "armorcolorizer.colorizer.listcolors";
     }
 }

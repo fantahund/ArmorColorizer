@@ -169,7 +169,7 @@ public class HSBDyeGui extends AbstractWindow {
                 case ARMOR_INDEX -> item = armorItem;
 
                 case CONFIRM_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), plugin.getEconomy().getBalance(getPlayer()) >= plugin.getArmorColorizerConfig().getEconomyPrice() ? ChatUtil.GREEN + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), getPlayer().getGameMode() == GameMode.CREATIVE ? "" : plugin.getArmorColorizerConfig().getEconomyPrice() > 1 ? plugin.getEconomy().currencyNamePlural() : plugin.getEconomy().currencyNameSingular()) : ChatUtil.RED + messages.getNotenoughmoney());
+                        item = CustomHeads.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), getPlayer().getGameMode() == GameMode.CREATIVE ? null : plugin.getEconomy().getBalance(getPlayer()) >= plugin.getArmorColorizerConfig().getEconomyPrice() ? ChatUtil.GREEN + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), plugin.getArmorColorizerConfig().getEconomyPrice() > 1 ? plugin.getEconomy().currencyNamePlural() : plugin.getEconomy().currencyNameSingular()) : ChatUtil.RED + messages.getNotenoughmoney());
                 case RANDOM_INDEX -> item = CustomHeads.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
                 case SAVE_COLOR_INDEX ->
                         item = CustomHeadsUtil.SERVER.getHead(plugin.getPlayerColors(getPlayer()).contains(color) ? ChatUtil.RED + messages.getGuiSaveColor() : ChatUtil.GREEN + messages.getGuiSaveColor());

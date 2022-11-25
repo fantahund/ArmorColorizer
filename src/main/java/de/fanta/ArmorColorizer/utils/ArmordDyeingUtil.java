@@ -62,8 +62,8 @@ public class ArmordDyeingUtil {
             return;
         }
 
-        double price = plugin.getArmorColorizerConfig().getEconomyPrice();
-        if (plugin.getEconomy().withdrawPlayer(player, 100).transactionSuccess()) {
+        double price = plugin.getArmorColorizerConfig().getUseEconomy() ? plugin.getArmorColorizerConfig().getEconomyPrice() : 0;
+        if (plugin.getEconomy().withdrawPlayer(player, price).transactionSuccess()) {
             ArmordDyeingUtil.dyeingLeatherItem(stack, org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue()));
             Bukkit.getPluginManager().callEvent(new ArmorColorizerTransactionEvent(player, stack, -price));
             ChatUtil.sendNormalMessage(player, plugin.getMessages().getItemsuccessfullycolored());
