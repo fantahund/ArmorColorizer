@@ -7,3 +7,13 @@ itemsuccessfullycolored: "Das Item wurde erfolgreich eingefärbt."
 moneywithdrawn: "Es wurden %price% %currency% von deinem Konto abgebucht."
 itemHasSameColor: "Das Item hat bereits diese Farbe."
 noiteminhand: "Du musst ein färbbares Item in der Hand haben."
+insertColorError: "Die Farbe konnte nicht gespeichert werden."
+insertColorSuccessful: "Die Farbe wurde erfolgreich gespeichert."
+insertColorAlreadyAvailable: "Die Farbe wurde bereits gespeichert."
+guiTitle: '&x52ff9dGespeicherte Farben'
+guiScrollUp: 'Nach oben scrollen'
+guiScrollDown: 'Nach unten scrollen'
+guiClose: '&x52ff9dMenü schließen'
+noSavedColors: 'Du hast keine gespeicherten Farben.'
+sortRainbow: "&x52ff9dSortierung: &xfe7676R&xfe916ce&xfead62g&xfecc64e&xffeb66n&xadf56ab&x5cff6fo&x68eeb7g&x75ddffe&xc176fen"
+sortDate: "&x52ff9dSortierung: &x87f7eaDatum"

@@ -1,5 +1,14 @@
 #Plugin Language (en_EN, de_DE)
 language: en_EN
+
+#Database Login
+database:
+  host: localhost
+  user: CHANGETHIS
+  password: CHANGETHIS
+  database: CHANGETHIS
+  tableprefix: armorcolorizer
+
 economy:
   enable: true
   price: 100.0

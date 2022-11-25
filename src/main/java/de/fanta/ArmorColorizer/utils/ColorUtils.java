@@ -2,35 +2,32 @@ package de.fanta.ArmorColorizer.utils;
 
 import org.bukkit.Color;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 public class ColorUtils {
-    public Color[] rainbow(Color[] array, int k) {
-        if (array == null || array.length < 2) {
-            return array;
+    public static List<Color> rainbow(List<Color> colorList) {
+        HashMap<Integer, Color> hsbColors = new HashMap<>();
+        for (Color color : colorList) {
+            HSBColor hsbColor = new HSBColor(new java.awt.Color(color.asRGB()));
+            hsbColors.put(Integer.parseInt((int) hsbColor.getHue() + "" + (int) hsbColor.getSaturation() + "" + (int) hsbColor.getBrightness()), color);
         }
-        int left = 0;
-        int right = array.length - 1;
-        for (int round = 1; round <= k / 2; round++) {
-            int rightColor = k + 1 - round;
-            for (int i = left; i <= right; i++) {
-                if (array[i].asRGB() == round) {
-                    swap(array, i, left);
-                    left++;
-                } else if (array[i].asRGB() == rightColor) {
-                    swap(array, i, right);
-                    i--;
-                    right--;
-                }
-            }
-        }
-        return array;
-    }
 
-    private void swap(Color[] array, int left, int right) {
-        int tmp = array[left].asRGB();
-        array[left] = array[right];
-        array[right] = Color.fromRGB(tmp);
+
+        Integer[] colors = hsbColors.keySet().toArray(Integer[]::new);
+        Arrays.sort(colors, Comparator.comparingInt(Integer::intValue));
+
+        List<Color> rainbowList = new ArrayList<>();
+        for (Integer colorInt : colors) {
+            rainbowList.add(hsbColors.get(colorInt));
+        }
+
+
+        return rainbowList;
     }
 
     public static Color randomRGBColor() {

@@ -10,6 +10,16 @@ public class Messages {
     private String moneywithdrawn;
     private String itemHasSameColor;
     private String noiteminhand;
+    private String insertColorError;
+    private String insertColorSuccessful;
+    private String insertColorAlreadyAvailable;
+    private String guiTitle;
+    private String guiScrollUp;
+    private String guiScrollDown;
+    private String guiClose;
+    private String noSavedColors;
+    private String sortRainbow;
+    private String sortDate;
 
     public Messages(LanguageManager languageManager) {
         loadMessages(languageManager);
@@ -24,6 +34,16 @@ public class Messages {
         moneywithdrawn = languageManager.getMessage("moneywithdrawn");
         itemHasSameColor = languageManager.getMessage("itemHasSameColor");
         noiteminhand = languageManager.getMessage("noiteminhand");
+        insertColorError = languageManager.getMessage("insertColorError");
+        insertColorSuccessful = languageManager.getMessage("insertColorSuccessful");
+        insertColorAlreadyAvailable = languageManager.getMessage("insertColorAlreadyAvailable");
+        guiTitle = languageManager.getMessage("guiTitle");
+        guiScrollUp = languageManager.getMessage("guiScrollUp");
+        guiScrollDown = languageManager.getMessage("guiScrollDown");
+        guiClose = languageManager.getMessage("guiClose");
+        noSavedColors = languageManager.getMessage("noSavedColors");
+        sortRainbow = languageManager.getMessage("sortRainbow");
+        sortDate = languageManager.getMessage("sortDate");
     }
 
     public String getPrefix() {
@@ -56,5 +76,45 @@ public class Messages {
 
     public String getNoiteminhand() {
         return noiteminhand;
+    }
+
+    public String getInsertColorError() {
+        return insertColorError;
+    }
+
+    public String getInsertColorSuccessful() {
+        return insertColorSuccessful;
+    }
+
+    public String getInsertColorAlreadyAvailable() {
+        return insertColorAlreadyAvailable;
+    }
+
+    public String getGuiTitle() {
+        return guiTitle;
+    }
+
+    public String getGuiScrollUp() {
+        return guiScrollUp;
+    }
+
+    public String getGuiScrollDown() {
+        return guiScrollDown;
+    }
+
+    public String getGuiClose() {
+        return guiClose;
+    }
+
+    public String getNoSavedColors() {
+        return noSavedColors;
+    }
+
+    public String getSortRainbow() {
+        return sortRainbow;
+    }
+
+    public String getSortDate() {
+        return sortDate;
     }
 }

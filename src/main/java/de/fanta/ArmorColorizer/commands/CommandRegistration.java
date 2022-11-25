@@ -7,9 +7,11 @@ public record CommandRegistration(ArmorColorizer plugin) {
 
     public void registerCommands() {
 
-        CommandRouter testRouter = new CommandRouter(plugin.getCommand("armorcolorizer"));
-        testRouter.addCommandMapping(new ArmorColorizerHexCommand(), "hex");
-        testRouter.addCommandMapping(new ArmorColorizerRGBCommand(plugin), "rgb");
-        testRouter.addCommandMapping(new ArmorColorizerHSBCommand(plugin), "hsb");
+        CommandRouter armorColorizeRouter = new CommandRouter(plugin.getCommand("armorcolorizer"));
+        armorColorizeRouter.addCommandMapping(new ArmorColorizerHexCommand(), "hex");
+        armorColorizeRouter.addCommandMapping(new ArmorColorizerRGBCommand(plugin), "rgb");
+        armorColorizeRouter.addCommandMapping(new ArmorColorizerHSBCommand(plugin), "hsb");
+        armorColorizeRouter.addCommandMapping(new ArmorColorizerSaveColorCommand(plugin), "savecolor");
+        armorColorizeRouter.addCommandMapping(new ArmorColorizerColorListCommand(plugin), "listcolors");
     }
 }
