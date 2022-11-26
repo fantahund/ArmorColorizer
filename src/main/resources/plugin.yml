@@ -5,6 +5,7 @@ api-version: 1.19
 prefix: ArmorColorizer
 authors: [ fanta ]
 depend: [CubesideUtils, Vault]
+loadbefore: [OpenInv]
 description: With this plugin you can colorize armor in a GUI.
 commands:
   armorcolorizer:
