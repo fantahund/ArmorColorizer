@@ -9,7 +9,6 @@ import de.fanta.ArmorColorizer.utils.CustomHeadsUtil;
 import de.fanta.ArmorColorizer.utils.HSBColor;
 import de.fanta.ArmorColorizer.utils.guiutils.AbstractWindow;
 import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
-import de.iani.cubesideutils.bukkit.items.CustomHeads;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -148,29 +147,29 @@ public class HSBDyeGui extends AbstractWindow {
             switch (i) {
                 case HUE_INDEX -> item = GUIUtils.createGuiItem(Material.LOOM, messages.getHue(HSBcolor.getHue()));
                 case ADD_HUE_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(messages.getAddHue(HSBcolor.getHue()), messages.getClick(1), messages.getShiftClick(10));
+                        item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddHue(HSBcolor.getHue()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_HUE_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(messages.getAddHue(HSBcolor.getHue()), messages.getClick(-1), messages.getShiftClick(-10));
+                        item = CustomHeadsUtil.RAINBOW_ARROW_DOWN.getHead(messages.getAddHue(HSBcolor.getHue()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case SATURATION_INDEX ->
                         item = GUIUtils.createGuiItem(Material.WOODEN_SWORD, messages.getSaturation(HSBcolor.getSaturation()));
                 case ADD_SATURATION_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(messages.getAddSaturation(HSBcolor.getSaturation()), messages.getClick(1), messages.getShiftClick(10));
+                        item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddSaturation(HSBcolor.getSaturation()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_SATURATION_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveSaturation(HSBcolor.getSaturation()), messages.getClick(-1), messages.getShiftClick(-10));
+                        item = CustomHeadsUtil.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveSaturation(HSBcolor.getSaturation()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case LUMINANCE_INDEX ->
                         item = GUIUtils.createGuiItem(Material.LIGHT, messages.getBrightness(HSBcolor.getBrightness()));
                 case ADD_LUMINANCE_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_UP.getHead(messages.getAddBrightness(HSBcolor.getBrightness()), messages.getClick(1), messages.getShiftClick(10));
+                        item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddBrightness(HSBcolor.getBrightness()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_LUMINANCE_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveBrightness(HSBcolor.getBrightness()), messages.getClick(-1), messages.getShiftClick(-10));
+                        item = CustomHeadsUtil.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveBrightness(HSBcolor.getBrightness()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case ARMOR_INDEX -> item = armorItem;
 
                 case CONFIRM_INDEX ->
-                        item = CustomHeads.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), getPlayer().getGameMode() == GameMode.CREATIVE ? null : plugin.getEconomy().getBalance(getPlayer()) >= plugin.getArmorColorizerConfig().getEconomyPrice() ? ChatUtil.GREEN + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), plugin.getArmorColorizerConfig().getEconomyPrice() > 1 ? plugin.getEconomy().currencyNamePlural() : plugin.getEconomy().currencyNameSingular()) : ChatUtil.RED + messages.getNotenoughmoney());
-                case RANDOM_INDEX -> item = CustomHeads.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
+                        item = CustomHeadsUtil.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), getPlayer().getGameMode() == GameMode.CREATIVE ? null : plugin.getEconomy().getBalance(getPlayer()) >= plugin.getArmorColorizerConfig().getEconomyPrice() ? ChatUtil.GREEN + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), plugin.getArmorColorizerConfig().getEconomyPrice() > 1 ? plugin.getEconomy().currencyNamePlural() : plugin.getEconomy().currencyNameSingular()) : ChatUtil.RED + messages.getNotenoughmoney());
+                case RANDOM_INDEX -> item = CustomHeadsUtil.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
                 case SAVE_COLOR_INDEX ->
                         item = CustomHeadsUtil.SERVER.getHead(plugin.getPlayerColors(getPlayer()).contains(color) ? ChatUtil.RED + messages.getGuiSaveColor() : ChatUtil.GREEN + messages.getGuiSaveColor());
                 default -> item = GUIUtils.EMPTY_ICON;
