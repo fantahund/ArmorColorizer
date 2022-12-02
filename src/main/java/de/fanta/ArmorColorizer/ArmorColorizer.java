@@ -5,6 +5,7 @@ import de.fanta.ArmorColorizer.data.ArmorColorizerConfig;
 import de.fanta.ArmorColorizer.data.Database;
 import de.fanta.ArmorColorizer.data.LanguageManager;
 import de.fanta.ArmorColorizer.data.Messages;
+import de.fanta.ArmorColorizer.utils.EconomyBridge;
 import de.fanta.ArmorColorizer.utils.guiutils.WindowManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
@@ -32,6 +33,7 @@ public final class ArmorColorizer extends JavaPlugin {
     private Economy economy;
     private HashMap<UUID, List<Color>> playerColors;
     private boolean isPaperServer;
+    private final List<UUID> noCostPlayerList = new ArrayList<>();
 
     public static ArmorColorizer getPlugin() {
         return plugin;
@@ -48,10 +50,10 @@ public final class ArmorColorizer extends JavaPlugin {
         this.database = new Database(armorColorizerConfig.getSQLConfig(), this);
 
         RegisteredServiceProvider<Economy> economyRegistration = getServer().getServicesManager().getRegistration(Economy.class);
-        if (economyRegistration == null) {
-            throw new IllegalStateException("Could not find any vault economy provider.");
+        if (economyRegistration != null) {
+            EconomyBridge.setEconomyActiv(true);
+            economy = economyRegistration.getProvider();
         }
-        economy = economyRegistration.getProvider();
 
         new CommandRegistration(this).registerCommands();
         Bukkit.getPluginManager().registerEvents(new WindowManager(), plugin);
@@ -120,5 +122,9 @@ public final class ArmorColorizer extends JavaPlugin {
 
     public boolean isPaperServer() {
         return isPaperServer;
+    }
+
+    public List<UUID> getNoCostPlayerList() {
+        return noCostPlayerList;
     }
 }

@@ -1,9 +1,7 @@
 package de.fanta.ArmorColorizer.utils;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
-import de.fanta.ArmorColorizer.events.ArmorColorizerTransactionEvent;
 import de.iani.cubesideutils.bukkit.items.ItemGroups;
-import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -15,17 +13,18 @@ public class ArmordDyeingUtil {
 
     private static final ArmorColorizer plugin = ArmorColorizer.getPlugin();
 
-    public static void dyeingLeatherItem(ItemStack stack, Color color) {
+    public static ItemStack dyeingLeatherItem(ItemStack stack, Color color) {
         if (color == null) {
-            return;
+            return null;
         }
 
         LeatherArmorMeta itemMeta = (LeatherArmorMeta) stack.getItemMeta();
         if (itemMeta == null) {
-            return;
+            return null;
         }
         itemMeta.setColor(color);
         stack.setItemMeta(itemMeta);
+        return stack;
     }
 
     public static boolean itemHasSameColor(ItemStack stack, Color color) {
@@ -55,21 +54,28 @@ public class ArmordDyeingUtil {
             return;
         }
 
-        if (player.getGameMode() == GameMode.CREATIVE) {
+        if (player.getGameMode() == GameMode.CREATIVE || plugin.getNoCostPlayerList().contains(player.getUniqueId())) {
             ArmordDyeingUtil.dyeingLeatherItem(stack, org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue()));
             ChatUtil.sendNormalMessage(player, plugin.getMessages().getItemsuccessfullycolored());
             player.closeInventory();
             return;
         }
 
-        double price = plugin.getArmorColorizerConfig().getUseEconomy() ? plugin.getArmorColorizerConfig().getEconomyPrice() : 0;
-        if (plugin.getEconomy().withdrawPlayer(player, price).transactionSuccess()) {
-            ArmordDyeingUtil.dyeingLeatherItem(stack, org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue()));
-            Bukkit.getPluginManager().callEvent(new ArmorColorizerTransactionEvent(player, stack, -price));
-            ChatUtil.sendNormalMessage(player, plugin.getMessages().getItemsuccessfullycolored());
-            ChatUtil.sendNormalMessage(player, plugin.getMessages().getMoneywithdrawn(price, plugin.getEconomy().currencyNamePlural()));
+
+        if (EconomyBridge.isEconomyActiv()) {
+            double price = plugin.getArmorColorizerConfig().getEconomyPrice();
+            if (EconomyBridge.hasEnoughMoney(player, price)) {
+                ItemStack eventItem = ArmordDyeingUtil.dyeingLeatherItem(stack.clone(), org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue()));
+                if (EconomyBridge.withdrawMoney(player, price, eventItem)) {
+                    ArmordDyeingUtil.dyeingLeatherItem(stack, org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue()));
+                    ChatUtil.sendNormalMessage(player, plugin.getMessages().getItemsuccessfullycolored());
+                }
+            } else {
+                ChatUtil.sendErrorMessage(player, plugin.getMessages().getNotenoughmoney());
+            }
         } else {
-            ChatUtil.sendErrorMessage(player, plugin.getMessages().getNotenoughmoney());
+            ArmordDyeingUtil.dyeingLeatherItem(stack, org.bukkit.Color.fromRGB(color.getRed(), color.getGreen(), color.getBlue()));
+            ChatUtil.sendNormalMessage(player, plugin.getMessages().getItemsuccessfullycolored());
         }
     }
 }

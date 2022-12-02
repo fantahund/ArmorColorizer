@@ -57,6 +57,10 @@ public class Messages {
     private String blueRangeError;
     private String colorDeleteSuccessful;
     private String colorDeleteError;
+    private String freeModeEnable;
+    private String freeModeDisable;
+    private String freeModeAlreadyEnabled;
+    private String freeModeAlreadyDisabled;
 
     public Messages(LanguageManager languageManager) {
         loadMessages(languageManager);
@@ -118,6 +122,10 @@ public class Messages {
         blueRangeError = languageManager.getMessage("blueRangeError");
         colorDeleteSuccessful = languageManager.getMessage("colorDeleteSuccessful");
         colorDeleteError = languageManager.getMessage("colorDeleteError");
+        freeModeEnable = languageManager.getMessage("freeModeEnable");
+        freeModeDisable = languageManager.getMessage("freeModeDisable");
+        freeModeAlreadyEnabled = languageManager.getMessage("freeModeAlreadyEnabled");
+        freeModeAlreadyDisabled = languageManager.getMessage("freeModeAlreadyDisabled");
     }
 
     public String getPrefix() {
@@ -337,5 +345,21 @@ public class Messages {
 
     public String getColorDeleteError() {
         return colorDeleteError;
+    }
+
+    public String getFreeModeEnable() {
+        return freeModeEnable;
+    }
+
+    public String getFreeModeDisable() {
+        return freeModeDisable;
+    }
+
+    public String getFreeModeAlreadyEnabled() {
+        return freeModeAlreadyEnabled;
+    }
+
+    public String getFreeModeAlreadyDisabled() {
+        return freeModeAlreadyDisabled;
     }
 }

@@ -33,6 +33,7 @@ public class ArmorColorizerListener implements Listener {
         if (plugin.getPlayerColors(e.getPlayer()) != null) {
             plugin.removePlayerColors(e.getPlayer());
         }
+        plugin.getNoCostPlayerList().remove(e.getPlayer().getUniqueId());
     }
 
 }

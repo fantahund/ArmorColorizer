@@ -6,6 +6,7 @@ import de.fanta.ArmorColorizer.utils.ArmordDyeingUtil;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
 import de.fanta.ArmorColorizer.utils.ColorUtils;
 import de.fanta.ArmorColorizer.utils.CustomHeadsUtil;
+import de.fanta.ArmorColorizer.utils.EconomyBridge;
 import de.fanta.ArmorColorizer.utils.guiutils.AbstractWindow;
 import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
 import org.bukkit.Bukkit;
@@ -162,9 +163,24 @@ public class RGBDyeGui extends AbstractWindow {
 
                 case ARMOR_INDEX -> item = armorItem;
 
-                case CONFIRM_INDEX ->
-                        item = CustomHeadsUtil.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), getPlayer().getGameMode() == GameMode.CREATIVE ? null : plugin.getEconomy().getBalance(getPlayer()) >= plugin.getArmorColorizerConfig().getEconomyPrice() ? ChatUtil.GREEN + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), plugin.getArmorColorizerConfig().getEconomyPrice() > 1 ? plugin.getEconomy().currencyNamePlural() : plugin.getEconomy().currencyNameSingular()) : ChatUtil.RED + messages.getNotenoughmoney());
-                case RANDOM_INDEX -> item = CustomHeadsUtil.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
+                case CONFIRM_INDEX -> {
+                    Player player = getPlayer();
+                    ItemStack displayItem;
+                    if (EconomyBridge.isEconomyActiv()) {
+                        if (player.getGameMode() == GameMode.CREATIVE || plugin.getNoCostPlayerList().contains(player.getUniqueId())) {
+                            displayItem = CustomHeadsUtil.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor());
+                        } else if (EconomyBridge.hasEnoughMoney(player, plugin.getArmorColorizerConfig().getEconomyPrice())) {
+                            displayItem = CustomHeadsUtil.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), ChatUtil.GREEN + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), EconomyBridge.getCurrencyName(plugin.getArmorColorizerConfig().getEconomyPrice())));
+                        } else {
+                            displayItem = CustomHeadsUtil.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor(), ChatUtil.RED + messages.getPrice(plugin.getArmorColorizerConfig().getEconomyPrice(), ChatUtil.RED + messages.getNotenoughmoney()));
+                        }
+                    } else {
+                        displayItem = CustomHeadsUtil.RAINBOW_ARROW_RIGHT.getHead(ChatUtil.GREEN + messages.getChangeColor());
+                    }
+                    item = displayItem;
+                }
+                case RANDOM_INDEX ->
+                        item = CustomHeadsUtil.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
                 case SAVE_COLOR_INDEX ->
                         item = CustomHeadsUtil.SERVER.getHead(plugin.getPlayerColors(getPlayer()).contains(color) ? ChatUtil.RED + messages.getGuiSaveColor() : ChatUtil.GREEN + messages.getGuiSaveColor());
                 default -> item = GUIUtils.EMPTY_ICON;
