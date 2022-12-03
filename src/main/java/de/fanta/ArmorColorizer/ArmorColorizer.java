@@ -49,16 +49,17 @@ public final class ArmorColorizer extends JavaPlugin {
 
         this.database = new Database(armorColorizerConfig.getSQLConfig(), this);
 
-        try {
-            RegisteredServiceProvider<Economy> economyRegistration = getServer().getServicesManager().getRegistration(Economy.class);
-            if (economyRegistration != null) {
-                EconomyBridge.setEconomyActiv(true);
-                economy = economyRegistration.getProvider();
+        if (getArmorColorizerConfig().getUseEconomy()) {
+            try {
+                RegisteredServiceProvider<Economy> economyRegistration = getServer().getServicesManager().getRegistration(Economy.class);
+                if (economyRegistration != null) {
+                    EconomyBridge.setEconomyActiv(true);
+                    economy = economyRegistration.getProvider();
+                }
+            } catch (NoClassDefFoundError ex) {
+                getLogger().log(Level.WARNING, "Could not find any vault economy provider.");
             }
-        } catch (NoClassDefFoundError ex) {
-            getLogger().log(Level.WARNING, "Could not find any vault economy provider.");
         }
-
 
         new CommandRegistration(this).registerCommands();
         Bukkit.getPluginManager().registerEvents(new WindowManager(), plugin);
