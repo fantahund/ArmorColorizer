@@ -13,6 +13,8 @@ public record CommandRegistration(ArmorColorizer plugin) {
         armorColorizeRouter.addCommandMapping(new ArmorColorizerHSBCommand(plugin), "hsb");
         armorColorizeRouter.addCommandMapping(new ArmorColorizerSaveColorCommand(plugin), "savecolor");
         armorColorizeRouter.addCommandMapping(new ArmorColorizerColorListCommand(plugin), "listcolors");
+        armorColorizeRouter.addCommandMapping(new ArmorColorizerTrimCommand(plugin), "trim");
+        armorColorizeRouter.addCommandMapping(new ArmorColorizerTrimRandomCommand(), "trim", "random");
         armorColorizeRouter.addCommandMapping(new ArmorColorizerFreeColorCommand(plugin, true), "free", "enable");
         armorColorizeRouter.addCommandMapping(new ArmorColorizerFreeColorCommand(plugin, false), "free", "disable");
     }

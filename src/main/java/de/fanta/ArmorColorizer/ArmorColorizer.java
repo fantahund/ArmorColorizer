@@ -10,8 +10,11 @@ import de.fanta.ArmorColorizer.utils.guiutils.WindowManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.inventory.meta.trim.TrimMaterial;
+import org.bukkit.inventory.meta.trim.TrimPattern;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -34,6 +37,8 @@ public final class ArmorColorizer extends JavaPlugin {
     private HashMap<UUID, List<Color>> playerColors;
     private boolean isPaperServer;
     private final List<UUID> noCostPlayerList = new ArrayList<>();
+    private static HashMap<Material, TrimPattern> trimPatternMap;
+    private static HashMap<Material, TrimMaterial> trimColorMap;
 
     public static ArmorColorizer getPlugin() {
         return plugin;
@@ -68,6 +73,8 @@ public final class ArmorColorizer extends JavaPlugin {
         pM.registerEvents(new ArmorColorizerListener(), this);
 
         playerColors = new HashMap<>();
+        trimPatternMap = createTrimPatternMap();
+        trimColorMap = createTrimColorMap();
 
         try {
             SkullMeta.class.getDeclaredMethod("getPlayerProfile");
@@ -132,5 +139,49 @@ public final class ArmorColorizer extends JavaPlugin {
 
     public List<UUID> getNoCostPlayerList() {
         return noCostPlayerList;
+    }
+
+    public HashMap<Material, TrimPattern> getTrimPatternMap() {
+        return trimPatternMap;
+    }
+
+    public HashMap<Material, TrimMaterial> getTrimColorMap() {
+        return trimColorMap;
+    }
+
+    private HashMap<Material, TrimPattern> createTrimPatternMap() {
+        HashMap<Material, TrimPattern> trims = new HashMap<>();
+        trims.put(Material.SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.SENTRY);
+        trims.put(Material.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.DUNE);
+        trims.put(Material.COAST_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.COAST);
+        trims.put(Material.WILD_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.WILD);
+        trims.put(Material.WARD_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.WARD);
+        trims.put(Material.EYE_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.EYE);
+        trims.put(Material.VEX_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.VEX);
+        trims.put(Material.TIDE_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.TIDE);
+        trims.put(Material.SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.SNOUT);
+        trims.put(Material.RIB_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.RIB);
+        trims.put(Material.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.SPIRE);
+        trims.put(Material.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.WAYFINDER);
+        trims.put(Material.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.SHAPER);
+        trims.put(Material.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.SILENCE);
+        trims.put(Material.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.RAISER);
+        trims.put(Material.HOST_ARMOR_TRIM_SMITHING_TEMPLATE, TrimPattern.HOST);
+        return trims;
+    }
+
+    private HashMap<Material, TrimMaterial> createTrimColorMap() {
+        HashMap<Material, TrimMaterial> trimMaterial = new HashMap<>();
+        trimMaterial.put(Material.EMERALD, TrimMaterial.EMERALD);
+        trimMaterial.put(Material.REDSTONE, TrimMaterial.REDSTONE);
+        trimMaterial.put(Material.LAPIS_LAZULI, TrimMaterial.LAPIS);
+        trimMaterial.put(Material.QUARTZ, TrimMaterial.QUARTZ);
+        trimMaterial.put(Material.NETHERITE_INGOT, TrimMaterial.NETHERITE);
+        trimMaterial.put(Material.DIAMOND, TrimMaterial.DIAMOND);
+        trimMaterial.put(Material.GOLD_INGOT, TrimMaterial.GOLD);
+        trimMaterial.put(Material.IRON_INGOT, TrimMaterial.IRON);
+        trimMaterial.put(Material.COPPER_INGOT, TrimMaterial.COPPER);
+        trimMaterial.put(Material.AMETHYST_SHARD, TrimMaterial.AMETHYST);
+        return trimMaterial;
     }
 }

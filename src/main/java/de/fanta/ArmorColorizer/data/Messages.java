@@ -61,6 +61,11 @@ public class Messages {
     private String freeModeDisable;
     private String freeModeAlreadyEnabled;
     private String freeModeAlreadyDisabled;
+    private String itemNoTrim;
+    private String trimSelectGUITitle;
+    private String trimSelectColorGUITitle;
+    private String itemSuccessfullyTrim;
+    private String itemHasSameTrim;
 
     public Messages(LanguageManager languageManager) {
         loadMessages(languageManager);
@@ -126,6 +131,11 @@ public class Messages {
         freeModeDisable = languageManager.getMessage("freeModeDisable");
         freeModeAlreadyEnabled = languageManager.getMessage("freeModeAlreadyEnabled");
         freeModeAlreadyDisabled = languageManager.getMessage("freeModeAlreadyDisabled");
+        itemNoTrim = languageManager.getMessage("itemNoTrim");
+        trimSelectGUITitle = languageManager.getMessage("trimSelectGUITitle");
+        trimSelectColorGUITitle = languageManager.getMessage("trimSelectColorGUITitle");
+        itemSuccessfullyTrim = languageManager.getMessage("itemSuccessfullyTrim");
+        itemHasSameTrim = languageManager.getMessage("itemHasSameTrim");
     }
 
     public String getPrefix() {
@@ -303,6 +313,7 @@ public class Messages {
     public String getRemoveSaturation(float saturationValue) {
         return removeSaturation.replace("%saturation%", String.valueOf(saturationValue));
     }
+
     public String getBrightness(float brightnessValue) {
         return brightness.replace("%brightness%", String.valueOf(brightnessValue));
     }
@@ -361,5 +372,25 @@ public class Messages {
 
     public String getFreeModeAlreadyDisabled() {
         return freeModeAlreadyDisabled;
+    }
+
+    public String getItemNoTrim() {
+        return itemNoTrim;
+    }
+
+    public String getTrimSelectGUITitle() {
+        return trimSelectGUITitle;
+    }
+
+    public String getTrimSelectColorGUITitle() {
+        return trimSelectColorGUITitle;
+    }
+
+    public String getItemSuccessfullyTrim() {
+        return itemSuccessfullyTrim;
+    }
+
+    public String getItemHasSameTrim() {
+        return itemHasSameTrim;
     }
 }

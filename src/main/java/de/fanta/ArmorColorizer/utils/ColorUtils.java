@@ -1,15 +1,19 @@
 package de.fanta.ArmorColorizer.utils;
 
+import de.fanta.ArmorColorizer.ArmorColorizer;
 import org.bukkit.Color;
+import org.bukkit.inventory.meta.trim.ArmorTrim;
+import org.bukkit.inventory.meta.trim.TrimMaterial;
+import org.bukkit.inventory.meta.trim.TrimPattern;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
 public class ColorUtils {
+
+    private static final ArmorColorizer plugin = ArmorColorizer.getPlugin();
+    private static final Random random = new Random();
+
     public static List<Color> rainbow(List<Color> colorList) {
         return colorList.stream()
                 .map(c -> new HSBColor(new java.awt.Color(c.asRGB())))
@@ -59,5 +63,13 @@ public class ColorUtils {
             color = null;
         }
         return color;
+    }
+
+    public static ArmorTrim getRandomArmorTrim() {
+        List<TrimPattern> trimPatternList = plugin.getTrimPatternMap().values().stream().toList();
+        List<TrimMaterial> trimMaterialList = plugin.getTrimColorMap().values().stream().toList();
+        TrimPattern trimPattern = trimPatternList.get(random.nextInt(trimPatternList.size()));
+        TrimMaterial trimMaterial = trimMaterialList.get(random.nextInt(trimMaterialList.size()));
+        return new ArmorTrim(trimMaterial, trimPattern);
     }
 }
