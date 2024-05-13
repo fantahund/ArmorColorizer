@@ -2,7 +2,7 @@ package de.fanta.ArmorColorizer.guis;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
-import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
+import de.fanta.ArmorColorizer.utils.ItemUtil;
 import de.iani.cubesideutils.StringUtil;
 import de.iani.cubesideutils.bukkit.inventory.AbstractWindow;
 import org.bukkit.Bukkit;
@@ -49,7 +49,7 @@ public class ArmorTrimSelectGui extends AbstractWindow {
         for (int slot = 0; slot < this.getInventory().getSize(); slot++) {
             ItemStack item = this.getInventory().getItem(slot);
             if (item == null) {
-                this.getInventory().setItem(slot, GUIUtils.EMPTY_ICON);
+                this.getInventory().setItem(slot, ItemUtil.EMPTY_ICON);
             }
         }
     }

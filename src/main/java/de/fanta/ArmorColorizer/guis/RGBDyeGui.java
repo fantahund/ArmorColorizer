@@ -7,7 +7,7 @@ import de.fanta.ArmorColorizer.utils.ChatUtil;
 import de.fanta.ArmorColorizer.utils.ColorUtils;
 import de.fanta.ArmorColorizer.utils.CustomHeadsUtil;
 import de.fanta.ArmorColorizer.utils.EconomyBridge;
-import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
+import de.fanta.ArmorColorizer.utils.ItemUtil;
 import de.iani.cubesideutils.bukkit.inventory.AbstractWindow;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -142,20 +142,20 @@ public class RGBDyeGui extends AbstractWindow {
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             ItemStack item;
             switch (i) {
-                case RED_INDEX -> item = GUIUtils.createGuiItem(Material.RED_DYE, messages.getRed(color.getRed()));
+                case RED_INDEX -> item = ItemUtil.createGuiItem(Material.RED_DYE, messages.getRed(color.getRed()));
                 case ADD_RED_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddRed(color.getRed()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_RED_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveRed(color.getRed()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case GREEN_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.GREEN_DYE, messages.getGreen(color.getGreen()));
+                        item = ItemUtil.createGuiItem(Material.GREEN_DYE, messages.getGreen(color.getGreen()));
                 case ADD_GREEN_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddGreen(color.getGreen()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_GREEN_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveGreen(color.getGreen()), messages.getClick(-1), messages.getShiftClick(-10));
 
-                case BLUE_INDEX -> item = GUIUtils.createGuiItem(Material.BLUE_DYE, messages.getBlue(color.getBlue()));
+                case BLUE_INDEX -> item = ItemUtil.createGuiItem(Material.BLUE_DYE, messages.getBlue(color.getBlue()));
                 case ADD_BLUE_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddBlue(color.getBlue()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_BLUE_INDEX ->
@@ -183,7 +183,7 @@ public class RGBDyeGui extends AbstractWindow {
                         item = CustomHeadsUtil.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
                 case SAVE_COLOR_INDEX ->
                         item = CustomHeadsUtil.SERVER.getHead(plugin.getPlayerColors(getPlayer()).contains(color) ? ChatUtil.RED + messages.getGuiSaveColor() : ChatUtil.GREEN + messages.getGuiSaveColor());
-                default -> item = GUIUtils.EMPTY_ICON;
+                default -> item = ItemUtil.EMPTY_ICON;
             }
             this.getInventory().setItem(i, item);
         }

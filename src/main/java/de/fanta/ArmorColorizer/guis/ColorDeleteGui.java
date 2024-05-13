@@ -2,7 +2,7 @@ package de.fanta.ArmorColorizer.guis;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
-import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
+import de.fanta.ArmorColorizer.utils.ItemUtil;
 import de.iani.cubesideutils.bukkit.inventory.AbstractWindow;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -46,11 +46,11 @@ public class ColorDeleteGui extends AbstractWindow {
             stack.setItemMeta(meta);
             switch (i) {
                 case YES_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.LIME_CONCRETE, ChatUtil.GREEN + plugin.getMessages().getYes(), false);
+                        item = ItemUtil.createGuiItem(Material.LIME_CONCRETE, ChatUtil.GREEN + plugin.getMessages().getYes(), false);
                 case ITEM_INDEX -> item = stack;
                 case NO_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.RED_CONCRETE, ChatUtil.RED + plugin.getMessages().getNo(), false);
-                default -> item = GUIUtils.EMPTY_ICON;
+                        item = ItemUtil.createGuiItem(Material.RED_CONCRETE, ChatUtil.RED + plugin.getMessages().getNo(), false);
+                default -> item = ItemUtil.EMPTY_ICON;
             }
             this.getInventory().setItem(i, item);
         }

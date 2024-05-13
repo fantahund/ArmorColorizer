@@ -8,7 +8,7 @@ import de.fanta.ArmorColorizer.utils.ColorUtils;
 import de.fanta.ArmorColorizer.utils.CustomHeadsUtil;
 import de.fanta.ArmorColorizer.utils.EconomyBridge;
 import de.fanta.ArmorColorizer.utils.HSBColor;
-import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
+import de.fanta.ArmorColorizer.utils.ItemUtil;
 import de.iani.cubesideutils.bukkit.inventory.AbstractWindow;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -146,21 +146,21 @@ public class HSBDyeGui extends AbstractWindow {
         for (int i = 0; i < INVENTORY_SIZE; i++) {
             ItemStack item;
             switch (i) {
-                case HUE_INDEX -> item = GUIUtils.createGuiItem(Material.LOOM, messages.getHue(HSBcolor.getHue()));
+                case HUE_INDEX -> item = ItemUtil.createGuiItem(Material.LOOM, messages.getHue(HSBcolor.getHue()));
                 case ADD_HUE_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddHue(HSBcolor.getHue()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_HUE_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_DOWN.getHead(messages.getAddHue(HSBcolor.getHue()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case SATURATION_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.WOODEN_SWORD, messages.getSaturation(HSBcolor.getSaturation()));
+                        item = ItemUtil.createGuiItem(Material.WOODEN_SWORD, messages.getSaturation(HSBcolor.getSaturation()));
                 case ADD_SATURATION_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddSaturation(HSBcolor.getSaturation()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_SATURATION_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_DOWN.getHead(messages.getRemoveSaturation(HSBcolor.getSaturation()), messages.getClick(-1), messages.getShiftClick(-10));
 
                 case LUMINANCE_INDEX ->
-                        item = GUIUtils.createGuiItem(Material.LIGHT, messages.getBrightness(HSBcolor.getBrightness()));
+                        item = ItemUtil.createGuiItem(Material.LIGHT, messages.getBrightness(HSBcolor.getBrightness()));
                 case ADD_LUMINANCE_INDEX ->
                         item = CustomHeadsUtil.RAINBOW_ARROW_UP.getHead(messages.getAddBrightness(HSBcolor.getBrightness()), messages.getClick(1), messages.getShiftClick(10));
                 case REMOVE_LUMINANCE_INDEX ->
@@ -189,7 +189,7 @@ public class HSBDyeGui extends AbstractWindow {
                         item = CustomHeadsUtil.RAINBOW_R.getHead(ChatUtil.GREEN + messages.getRandomColor());
                 case SAVE_COLOR_INDEX ->
                         item = CustomHeadsUtil.SERVER.getHead(plugin.getPlayerColors(getPlayer()).contains(color) ? ChatUtil.RED + messages.getGuiSaveColor() : ChatUtil.GREEN + messages.getGuiSaveColor());
-                default -> item = GUIUtils.EMPTY_ICON;
+                default -> item = ItemUtil.EMPTY_ICON;
             }
             this.getInventory().setItem(i, item);
         }
