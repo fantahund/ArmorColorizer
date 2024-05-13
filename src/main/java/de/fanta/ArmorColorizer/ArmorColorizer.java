@@ -6,7 +6,6 @@ import de.fanta.ArmorColorizer.data.Database;
 import de.fanta.ArmorColorizer.data.LanguageManager;
 import de.fanta.ArmorColorizer.data.Messages;
 import de.fanta.ArmorColorizer.utils.EconomyBridge;
-import de.fanta.ArmorColorizer.utils.guiutils.WindowManager;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
@@ -67,7 +66,6 @@ public final class ArmorColorizer extends JavaPlugin {
         }
 
         new CommandRegistration(this).registerCommands();
-        Bukkit.getPluginManager().registerEvents(new WindowManager(), plugin);
 
         PluginManager pM = Bukkit.getPluginManager();
         pM.registerEvents(new ArmorColorizerListener(), this);

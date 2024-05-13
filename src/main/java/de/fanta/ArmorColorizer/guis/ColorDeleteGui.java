@@ -2,8 +2,8 @@ package de.fanta.ArmorColorizer.guis;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
-import de.fanta.ArmorColorizer.utils.guiutils.AbstractWindow;
 import de.fanta.ArmorColorizer.utils.guiutils.GUIUtils;
+import de.iani.cubesideutils.bukkit.inventory.AbstractWindow;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Material;

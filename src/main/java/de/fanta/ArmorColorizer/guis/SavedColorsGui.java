@@ -4,7 +4,7 @@ import de.fanta.ArmorColorizer.ArmorColorizer;
 import de.fanta.ArmorColorizer.utils.ArmordDyeingUtil;
 import de.fanta.ArmorColorizer.utils.ColorUtils;
 import de.fanta.ArmorColorizer.utils.CustomHeadsUtil;
-import de.fanta.ArmorColorizer.utils.guiutils.AbstractWindow;
+import de.iani.cubesideutils.bukkit.inventory.AbstractWindow;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
