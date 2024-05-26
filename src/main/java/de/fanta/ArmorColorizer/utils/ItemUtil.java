@@ -20,7 +20,7 @@ public class ItemUtil {
             builder.enchantment(Enchantment.UNBREAKING, 1, true).flag(ItemFlag.HIDE_ENCHANTS);
         }
         if (!showTooltip) {
-            builder.flag(ItemFlag.HIDE_ADDITIONAL_TOOLTIP);
+            builder.hideTooltip(true);
         }
         return builder.build();
 
