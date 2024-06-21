@@ -34,7 +34,6 @@ public final class ArmorColorizer extends JavaPlugin {
     private Database database;
     private Economy economy;
     private HashMap<UUID, List<Color>> playerColors;
-    private boolean isPaperServer;
     private final List<UUID> noCostPlayerList = new ArrayList<>();
     private static HashMap<Material, TrimPattern> trimPatternMap;
     private static HashMap<Material, TrimMaterial> trimColorMap;
@@ -73,14 +72,6 @@ public final class ArmorColorizer extends JavaPlugin {
         playerColors = new HashMap<>();
         trimPatternMap = createTrimPatternMap();
         trimColorMap = createTrimColorMap();
-
-        try {
-            SkullMeta.class.getDeclaredMethod("getPlayerProfile");
-            isPaperServer = true;
-        } catch (Exception e) {
-            getLogger().log(Level.INFO, "Server version spigot. We recommend to use Paper.");
-            isPaperServer = false;
-        }
     }
 
     public String getPrefix() {
@@ -129,10 +120,6 @@ public final class ArmorColorizer extends JavaPlugin {
 
     public void removePlayerColors(Player player) {
         playerColors.remove(player.getUniqueId());
-    }
-
-    public boolean isPaperServer() {
-        return isPaperServer;
     }
 
     public List<UUID> getNoCostPlayerList() {
