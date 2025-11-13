@@ -1,18 +1,16 @@
 package de.fanta.ArmorColorizer.commands;
 
-import com.google.common.collect.Collections2;
 import de.fanta.ArmorColorizer.utils.ArmordDyeingUtil;
 import de.fanta.ArmorColorizer.utils.ChatUtil;
 import de.fanta.ArmorColorizer.utils.ColorUtils;
 import de.iani.cubesideutils.bukkit.commands.SubCommand;
 import de.iani.cubesideutils.commands.ArgsParser;
+import java.util.Collection;
+import java.util.Collections;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Collection;
-import java.util.Collections;
 
 public class ArmorColorizerHexCommand extends SubCommand {
 

@@ -1,10 +1,12 @@
 package de.fanta.ArmorColorizer.guis;
 
 import de.fanta.ArmorColorizer.ArmorColorizer;
-import de.fanta.ArmorColorizer.utils.ChatUtil;
 import de.fanta.ArmorColorizer.utils.ItemUtil;
-import de.iani.cubesideutils.StringUtil;
 import de.iani.cubesideutils.bukkit.inventory.AbstractWindow;
+import java.util.HashMap;
+import java.util.UUID;
+import net.kyori.adventure.text.format.NamedTextColor;
+import net.kyori.adventure.text.format.TextDecoration;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -13,9 +15,6 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.trim.TrimPattern;
-
-import java.util.HashMap;
-import java.util.UUID;
 
 public class ArmorTrimSelectGui extends AbstractWindow {
 
@@ -37,7 +36,7 @@ public class ArmorTrimSelectGui extends AbstractWindow {
                 meta.addItemFlags(flag);
             }
             TrimPattern trimPattern = plugin.getTrimPatternMap().get(template.getType());
-            meta.setDisplayName(ChatUtil.GREEN + StringUtil.capitalizeFirstLetter(trimPattern.getKey().getKey(), false));
+            meta.displayName(trimPattern.description().color(NamedTextColor.GREEN).decoration(TextDecoration.ITALIC, false));
             template.setItemMeta(meta);
 
             int templateRow = i / 9;
