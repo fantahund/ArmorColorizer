@@ -7,8 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nullable;
+import org.jspecify.annotations.Nullable;
 
 public class ChatUtil {
 
@@ -60,7 +59,7 @@ public class ChatUtil {
     }
 
     public static void sendTitleToAll(String headline, String text, ChatColor textColor, boolean pling) {
-        sendTitleToAll(headline, text, textColor, 10, 60 , 10, pling);
+        sendTitleToAll(headline, text, textColor, 10, 60, 10, pling);
     }
 
     public static void sendTitleToPlayer(Player player, @Nullable String headline, @Nullable String text, ChatColor textColor, int in, int time, int out, boolean pling) {
